@@ -6,12 +6,12 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 # Paths to the directories
-image_dir = "D:/TMI-102/ATALI_1/train_images"
-mask_dir = "D:/TMI-102/ATALI_1/train_masks"
+image_dir = "/train_images"
+mask_dir = "/train_masks"
 
 # Create directories to store augmented data
-augmented_image_dir = "D:/TMI-102/ATALI_1/augmented_images"
-augmented_mask_dir = "D:/TMI-102/ATALI_1/augmented_masks"
+augmented_image_dir = "/augmented_images"
+augmented_mask_dir = "/augmented_masks"
 
 os.makedirs(augmented_image_dir, exist_ok=True)
 os.makedirs(augmented_mask_dir, exist_ok=True)
@@ -123,10 +123,6 @@ import numpy as np
 import cv2  # For reading images
 from sklearn.model_selection import train_test_split
 
-# Directories containing augmented images and masks
-image_dir = "D:/TMI-102/ATALI_1/augmented_images"
-mask_dir = "D:/TMI-102/ATALI_1/augmented_masks"
-
 # Load and resize images and masks to (256, 256)
 def load_data(image_dir, mask_dir):
     images = []
@@ -151,7 +147,7 @@ def load_data(image_dir, mask_dir):
     return np.array(images), np.array(masks)
 
 # Load data
-X, Y = load_data(image_dir, mask_dir)
+X, Y = load_data(augmented_image_dir, augmented_mask_dir)
 
 # Split data into training and validation sets (80% train, 20% validation)
 X_train, X_val, Y_train, Y_val = train_test_split(X, Y, test_size=0.2, random_state=42)
@@ -185,4 +181,5 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Validation'], loc='upper left')
 plt.show()
 
-#model.save("D:/TMI-102/ATALI_1/saved_model/U-Net.keras")
+model.save("/saved_model/U-Net.keras")
+
