@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct 30 12:57:21 2024
-
-@author: ALOK BHARDWAJ
 """
 
 from tensorflow.keras.models import load_model
@@ -13,11 +11,11 @@ import os
 
 
 
-img_path = "D:/TMI-102/ATALI_1/UAV_ORTHO.tif"
-model_path = "D:/TMI-102/ATALI_1/saved_model/U-Net.keras"
-plot_path = "D:/TMI-102/ATALI_1/Plots/Prediction_Atali.tiff"
-output_path = "D:/TMI-102/ATALI_1/LS_Poly.png"
-mask_path = "D:/TMI-102/ATALI_1/LS_Poly.tif"
+img_path = "UAV_ORTHO.tif"
+model_path = "/saved_model/U-Net.keras"
+plot_path = "/Plots/Prediction_Atali.tiff"
+output_path = "LS_Poly.png"
+mask_path = "LS_Poly.tif"
 
 model = load_model(model_path)
 
@@ -54,18 +52,7 @@ prediction, predicted_mask = segment_predict(img_path)
 plot(predicted_mask, img_path)
 
 def iou_score(y_true, y_pred, threshold=0.0001, epsilon=1e-7):
-    """
-    Calculates the Intersection over Union (IoU) score.
     
-    Parameters:
-        y_true (np.ndarray): Ground truth binary mask.
-        y_pred (np.ndarray): Predicted binary mask.
-        threshold (float): Threshold to binarize `y_pred`.
-        epsilon (float): Small value to prevent division by zero.
-        
-    Returns:
-        float: IoU score.
-    """
     # Binarize predictions based on threshold
     y_pred = (y_pred > threshold).astype(np.float32)
     y_true = (y_true > 0).astype(np.float32)
@@ -90,4 +77,5 @@ mask_arr = load_ground_truth_mask(mask_path)
 
 iou = iou_score(mask_arr, predicted_mask)
 print(f"IoU Score: {iou:.4f}")
+
 
