@@ -9,12 +9,12 @@ import numpy as np
 from PIL import Image
 
 # Directories for input TIFFs and output patches
-input_image_path = "D:/TMI-102/ATALI_1/UAV_ORTHO.tif"   # Path to the input TIFF image
-input_mask_path = "D:/TMI-102/ATALI_1/LS_Poly.tif"     # Path to the input TIFF mask
+input_image_path = "UAV_ORTHO.tif"   # Path to the input TIFF image
+input_mask_path = "LS_Poly.tif"     # Path to the input TIFF mask
 
 # Create directories to store the patches
-os.makedirs("D:/TMI-102/ATALI_1/train_images", exist_ok=True)
-os.makedirs("D:/TMI-102/ATALI_1/train_masks", exist_ok=True)
+os.makedirs("/train_images", exist_ok=True)
+os.makedirs("/train_masks", exist_ok=True)
 
 # Patch size
 PATCH_SIZE = 128
@@ -47,3 +47,4 @@ slice_image(image, PATCH_SIZE, "train_images", "image")
 slice_image(mask, PATCH_SIZE, "train_masks", "image")
 
 print("Slicing completed! Check 'train_images/' and 'train_masks/'.")
+
